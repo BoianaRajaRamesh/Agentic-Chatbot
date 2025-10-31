@@ -9,8 +9,10 @@ class GroqLlm:
     def get_llm_model(self):
         try:
             groq_api_key = self.user_input['GROQ_API_KEY']
+            print(groq_api_key)
+            os.environ["GROQ_API_KEY"] = groq_api_key
             selected_model = self.user_input['selected_model']
-            if groq_api_key == "" or not groq_api_key or os.environ["GROQ_API_KEY"]:
+            if groq_api_key == "" or not (groq_api_key or os.environ["GROQ_API_KEY"]):
                 st.error("Please enter api key")
 
             llm = ChatGroq(api_key=groq_api_key, model=selected_model)
