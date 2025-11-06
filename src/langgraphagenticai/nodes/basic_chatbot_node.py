@@ -12,4 +12,7 @@ class BasicChatBotNode:
         process state and generate a chatbot response
         """
         print("process")
-        return {"message": self.llm.invoke(state['message'])}
+        try:
+            return {"messages": self.llm.invoke(state['messages'])}
+        except Exception as e:
+            print(f"error in basic chat bot node {e}")
